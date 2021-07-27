@@ -1,0 +1,53 @@
+﻿<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<div class="resume-section-content">
+    <form id="frmPost">
+
+        <h2 class="mb-5">İletisim</h2>
+        <label>Ad Soyad</label>
+        <input type="text" class="form-control" name="AdSoyad" id="ad" />
+
+        <label>Mail</label>
+        <input type="text" class="form-control" name="Mail" id="mail" />
+
+
+        <label>Konu</label>
+        <textarea class="form-control" cols="30" rows="10" name="Mesaj" id="mesaj"></textarea>
+
+        <button type="submit" class="btn btn-success mt-2" id="msjGndr">Mesajı Gönder</button>
+
+
+
+    </form>
+</div>
+
+
+<script>
+    const n_AdSoyad = document.getElementById("ad");
+    const n_Mail = document.getElementById("mail");
+    const n_Mesaj = document.getElementById("mesaj");
+    const msjGndr = document.getElementById("msjGndr");
+    msjGndr.addEventListener("click", funcPost);
+    function funcPost(e) {
+
+        var requestData = { 
+            AdSoyad: $.trim(n_AdSoyad.value),
+            Mail: $.trim(n_Mail.value),
+            Mesaj: $.trim(n_Mesaj.value),
+
+            //SelectedCompanyCode: $.trim($('#SelectedCompanyCode').val())
+
+        };
+
+        $.ajax({
+            url: "/Default/iletisim",
+            type: "POST",
+            data: JSON.stringify(requestData),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+        });
+
+        e.preventDefault();
+
+    }
+</script>
